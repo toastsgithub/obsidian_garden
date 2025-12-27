@@ -1,5 +1,5 @@
 ---
-{"publish":true,"title":"Go Basic Learning Notes","created":"2020-03-25 14:09:48","modified":"2025-12-22T09:59:24.104+08:00","tags":["learning"],"cssclasses":""}
+{"publish":true,"title":"Go Basic Learning Notes","created":"2020-03-25 14:09:48","modified":"2025-12-27T14:35:46.470+08:00","tags":["learning"],"cssclasses":""}
 ---
 
 ****![|700x309](https://images2.dzmtoast.top/ob-240907-143147.png)
@@ -13,7 +13,7 @@ Learning go basics follow steps offered by: https://golangbot.com/learn-golang-s
 
 Wish me good luck
 
-# CheckList
+# Checklist
 
 Introduction
 ✅1 - Introduction and Installation
@@ -130,7 +130,7 @@ string
 
 \* int 表示 32bit / 64bit integer, 取决于操作系统是 32bit / 64bit, 大多数时候应该使用它, 而不直接指定 int32/int64
 
-\* 复数声明方式 
+\* 复数声明方式
 1. var cplx = complex(10, 20)
 2. var cplx = 10 + 20i
 
@@ -196,7 +196,7 @@ func init () {
 
 初始化函数不带任何参数，也不会有返回类型（当然了! 模块得保持中立，自然不存在参数化）
 
-# if-statement
+# If-statement
 
 other language:
 
@@ -289,7 +289,7 @@ arr := [...]int{1,2,3} // let compiler tell the length
 
 \* [3]int and [5]int are distinct types
 
-## value-type
+## Value-type
 
 \* Array in GO is 🚨 **VALUE-TYPE**, assignment of array will result in value copy
 
@@ -310,7 +310,7 @@ swap(myArr)
 myNewArr := swap(myArr)
 ```
 
-## iteration
+## Iteration
 
 go provide `range` to make iterating more concise
 
@@ -333,7 +333,7 @@ slice / array desctructing ->  `array...` ( a bit weird for javascript developer
 
 # Map
 
-## Basic syntax / usage
+## Basic Syntax / Usage
 
 ``` go
 salary := map[string]float64 {
@@ -343,7 +343,7 @@ salary := map[string]float64 {
 
 ```
 
-## access / set data:
+## Access / Set Data:
 
 just like javascript ...
 
@@ -373,7 +373,7 @@ fmt.Printf("%f | exist? %v\n", salary["boss"], eBoss)
 |string|""|
 |*pointer|nil|
 
-## iteration
+## Iteration
 pretty much like iteration of Array (use range func)
 
 with **FOR RANGE** flavor iteration, access order is **NOT** guaranteed
@@ -384,14 +384,14 @@ for key, value := range(salary) {
 }
 ```
 
-## delete
+## Delete
 just use `delete(map, key)` func
 
 ``` go
 delete(salary, "Boss") // how DARE you to delete boss from salary table!
 ```
 
-## facts about Map
+## Facts about Map
 
 \* maps are **ref-type** instead of value-type
 
@@ -399,7 +399,7 @@ delete(salary, "Boss") // how DARE you to delete boss from salary table!
 
 
 # Pointer
-## Why and when we need pointers
+## Why and when We Need Pointers
 ### Why
 Everything in go is passed by value, use pointer
 1. to make sure changes happened on original data object, not replica
@@ -407,7 +407,7 @@ Everything in go is passed by value, use pointer
 
 ### When
 
-## reference a variable (get pointer)
+## Reference a Variable (get pointer)
 
 ``` go
 aNum := "123"
@@ -418,7 +418,7 @@ fmt.Println("Address of aNum is : ", ref)
 
 
 
-## deference variable (get value of pointed)
+## Deference Variable (get Value of pointed)
 
 ``` go
 aNum := "123"
@@ -431,7 +431,7 @@ pString := new(string)
 fmt.Printf("check value: %v\n", *pString)
 ```
 
-## facts about Pointer
+## Facts about Pointer
 \* avoid passing pointer of array into function, use slice instead (but **WHY**?)
 \* zero value of `pointer` is `nil`
 
@@ -439,7 +439,7 @@ fmt.Printf("check value: %v\n", *pString)
 
 > Structure just like interface in TS ...
 
-## declaring
+## Declaring
 
 ``` go
 // named structure
@@ -457,11 +457,11 @@ var emp struct {
 }
 ```
 
-## creating
+## Creating
 
 > Similar to `initialize a instance` ...
 
-## zero value
+## Zero Value
 
 zero value of structure is a instance of zero-value of all members
 
@@ -475,7 +475,7 @@ type Emp struct {
 { '', 0 }
 ```
 
-## access property
+## Access Property
 ``` go
 emp3 := struct {
 	name string
@@ -487,7 +487,7 @@ fmt.Println(emp3.name)
 
 ```
 
-## pointer of structure
+## Pointer of Structure
 
 ``` go
 	pEmp3 := &emp3
@@ -498,10 +498,10 @@ fmt.Println(emp3.name)
 
 both way to access field are supported, compiler thing ..
 
-## nested structure
+## Nested Structure
 ofc, like a json
 
-## promoted fields
+## Promoted Fields
 
 ``` go
 type Address struct {  
@@ -529,7 +529,7 @@ func (r Rectangle) Area() int {
 
 `(r Regtangle)` （在 Go 中成为接收器）标明 Area 方法可以定义在一个 Rectangle 结构上，r 即 Rectangle 实例
 
-## WHY Method
+## Why Method
 1. Go 没有真正意义上的类，通过实现 type 上的 method 来实现像类一样的行为归并
 2. 相同名字的 method 可以定义在不同的类型上，但如果通过 func 来做，没有办法实现相同签名、不同参数下的不同逻辑
 
@@ -548,7 +548,7 @@ func (r *Rectangle) changeArea() int {
 
 有时出于性能考虑的原因，为了避免包含大量属性的实例被拷贝传入 method, 我们会偏向于使用定义在指针类型上的 method 来避免参数拷贝
 
-## method for non-local type
+## Method for Non-local Type
 
 method receiver 只能定义在当前包内的类型
 
@@ -698,7 +698,7 @@ func main () {
 
 Channel 的类型定下来之后，只能在 Channel 内传输符合类型定义的数据类型，不能传输其他类型
 
-## init
+## Init
 
 ``` go
 channelX = make(chan bool)
@@ -706,7 +706,7 @@ channelX = make(chan bool)
 
 初始化一个只能传输 bool 类型的 Channel
 
-## 死锁 DeadLock
+## 死锁 Deadlock
 
 如果
 
@@ -715,7 +715,7 @@ channelX = make(chan bool)
 
 会导致死锁
 
-## 从 channel 不停读取数据
+## 从 Channel 不停读取数据
 每次 channel 赋值都只会读取一次赋值的数据，如果 routine 不停在写数据，读取方需要循环来读取
 
 ``` go
@@ -751,7 +751,7 @@ for v := range sendch {
 }
 ```
 
-## channel 方向
+## Channel 方向
 
 channel 有方向性，通常我们使用 make(chan int) 构建一个双向 channel, 可以向这个 channel 写入数据，也可以用来读取数据
 
@@ -761,7 +761,7 @@ channel 有方向性，通常我们使用 make(chan int) 构建一个双向 chan
 双向 channel 在传入 goroutine 的时候可以转为单向 channel
 
 
-## 关闭 channel
+## 关闭 Channel
 
 使用 close(xxChannel) 来关闭一个 channel
 
@@ -771,13 +771,13 @@ channel 有方向性，通常我们使用 make(chan int) 构建一个双向 chan
 v, ok := <-someCh
 ```
 
-## WaitGroup
+## Waitgroup
 
 有点类似 JS 里的 Promise.all()
 
 # Select
 
-有点类似 JS 里的 Primise.race() ... 
+有点类似 JS 里的 Primise.race() ...
 
 # Mutex (临界区)
 
@@ -790,7 +790,7 @@ x++
 mu.Unlock()
 ```
 
-# OOP
+# Oop
 GO 没有真正意义上的 Class，只有 type
 
 Go 通过一些其他手段实现类似 Class 的功能
@@ -819,7 +819,7 @@ runtime 遇到 panic 的时候，会立即停止执行接下来的代码，将�
 
 从这个角度，panic 机制有点像 nodejs 的 process.exit(1)
 
-## recover
+## Recover
 
 recover 只能恢复当前协程里的 panic
 
