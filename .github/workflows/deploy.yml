@@ -24,11 +24,11 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
 
@@ -40,13 +40,13 @@ jobs:
 
       # 👉 给 GitHub Pages 用
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: public
 
       # 👉 给服务器用（关键）
       - name: Upload artifact for server
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: quartz-public
           path: public
@@ -68,13 +68,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download build artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: quartz-public
           path: public
 
       - name: Upload to server via rsync
-        uses: burnett01/rsync-deployments@v7
+        uses: burnett01/rsync-deployments@v8
         with:
           switches: -avz --delete
           path: public/
