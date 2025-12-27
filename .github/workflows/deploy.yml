@@ -44,13 +44,6 @@ jobs:
         with:
           path: public
 
-      # 👉 给服务器用（关键）
-      - name: Upload artifact for server
-        uses: actions/upload-artifact@v4
-        with:
-          name: quartz-public
-          path: public
-
   deploy:
     needs: build
     environment:
@@ -61,25 +54,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-  # ✅ 新增：部署到你自己的服务器
-  deploy-server:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: quartz-public
-          path: public
-
-      - name: Upload to server via rsync
-        uses: burnett01/rsync-deployments@v8
-        with:
-          switches: -avz --delete
-          path: public/
-          remote_path: /www/wwwroot/garden.dzmtoast.top
-          remote_host: ${{ secrets.SSH_HOST }}
-          remote_user: ${{ secrets.SSH_USER }}
-          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          remote_port: 22
